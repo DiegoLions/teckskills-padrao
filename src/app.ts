@@ -14,10 +14,17 @@ app.use(log)
 //configuração das rotas
 app.use(routes)
 
-//tentativa de erro
-app.use(errorHandling);
-// 
 
+app.use(errorHandling);
+
+// Testar a conexão
+import { database } from './database/database';
+
+(async () => {
+    console.log(await database.query('select now() as data_atual', []));
+})();
+
+//tentativa de erro
 // (err: any, req: Request, res: Response, next: NextFunction) => {
 // //     if(err){
 // //         return res.status(400).json({
