@@ -3,8 +3,10 @@ import { routes } from './routes/routes'
 
 import { log } from './middleware/log.middleware';
 import { errorHandling } from './middleware/error_handling.middleware';
+import { cid } from './middleware/cid.middleware';
 
 const app: Express = express()
+app.use(cid)
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -20,9 +22,9 @@ app.use(errorHandling);
 // Testar a conexão
 import { database } from './database/database';
 
-(async () => {
-    console.log(await database.query('select now() as data_atual', []));
-})();
+// (async () => {
+//     console.log(await database.query('select now() as data_atual', []));
+// })();
 
 //tentativa de erro
 // (err: any, req: Request, res: Response, next: NextFunction) => {
